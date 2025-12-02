@@ -91,14 +91,22 @@
 
         <!-- Severity (only for bugs) -->
         <div id="severity-container">
-          <label for="severity" class="block text-xs sm:text-sm font-medium text-gray-700 mb-2">Severity</label>
-          <select id="severity"
-                  class="w-full px-3 sm:px-4 py-2 sm:py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent text-sm sm:text-base">
-            <option value="low">Low - Minor issue</option>
-            <option value="medium" selected>Medium - Affects functionality</option>
-            <option value="high">High - Blocks important features</option>
-            <option value="critical">Critical - System is unusable</option>
-          </select>
+          <label class="block text-xs sm:text-sm font-medium text-gray-700 mb-2">Severity</label>
+          <div class="custom-select">
+            <div class="custom-select-trigger" id="severity-trigger">
+              <span id="severity-value">Medium - Affects functionality</span>
+              <svg class="custom-select-arrow" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+              </svg>
+            </div>
+            <div class="custom-select-dropdown" id="severity-dropdown">
+              <div class="custom-select-option" data-value="low">Low - Minor issue</div>
+              <div class="custom-select-option selected" data-value="medium">Medium - Affects functionality</div>
+              <div class="custom-select-option" data-value="high">High - Blocks important features</div>
+              <div class="custom-select-option" data-value="critical">Critical - System is unusable</div>
+            </div>
+            <input type="hidden" id="severity" value="medium">
+          </div>
         </div>
 
         <!-- Message -->
@@ -116,9 +124,9 @@
           <label for="description" class="block text-xs sm:text-sm font-medium text-gray-700 mb-2">
             Description
           </label>
-          <textarea id="description" rows="3" class="resize-none"
+          <textarea id="description" rows="3"
                     placeholder="Detailed description..."
-                    class="w-full px-3 sm:px-4 py-2 sm:py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent text-sm sm:text-base"></textarea>
+                    class="resize-none w-full px-3 sm:px-4 py-2 sm:py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent text-sm sm:text-base"></textarea>
         </div>
 
         <!-- Custom Fields -->
@@ -127,15 +135,15 @@
             Custom Fields (optional)
           </label>
           <div id="custom-fields-container" class="space-y-2 mb-3">
-            <div class="flex gap-2 items-center">
-              <input type="text" placeholder="Key (e.g., orderId)"
-                     class="custom-key flex-1 px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent text-xs sm:text-sm">
-              <input type="text" placeholder="Value (e.g., ORD-123)"
-                     class="custom-value flex-1 px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent text-xs sm:text-sm">
+            <div class="grid grid-cols-2 gap-2">
+              <input type="text" placeholder="Key"
+                     class="custom-key px-2 sm:px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent text-xs sm:text-sm">
+              <input type="text" placeholder="Value"
+                     class="custom-value px-2 sm:px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent text-xs sm:text-sm">
             </div>
           </div>
           <button type="button" id="add-custom-field"
-                  class="px-3 sm:px-4 py-2 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 text-xs sm:text-sm font-medium">
+                  class="w-full sm:w-auto px-3 sm:px-4 py-2 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 text-xs sm:text-sm font-medium">
             + Add Field
           </button>
         </div>
@@ -172,6 +180,40 @@
     // Make it globally accessible for demo
     window.oops = oops
     window.ui = ui
+
+    // Custom Select for Severity
+    const severityTrigger = document.getElementById('severity-trigger')
+    const severityDropdown = document.getElementById('severity-dropdown')
+    const severityValue = document.getElementById('severity-value')
+    const severityInput = document.getElementById('severity')
+    const severityOptions = severityDropdown.querySelectorAll('.custom-select-option')
+
+    severityTrigger.addEventListener('click', (e) => {
+      e.stopPropagation()
+      severityTrigger.classList.toggle('active')
+      severityDropdown.classList.toggle('active')
+    })
+
+    severityOptions.forEach(option => {
+      option.addEventListener('click', () => {
+        const value = option.dataset.value
+        const text = option.textContent
+
+        severityInput.value = value
+        severityValue.textContent = text
+
+        severityOptions.forEach(opt => opt.classList.remove('selected'))
+        option.classList.add('selected')
+
+        severityTrigger.classList.remove('active')
+        severityDropdown.classList.remove('active')
+      })
+    })
+
+    document.addEventListener('click', () => {
+      severityTrigger.classList.remove('active')
+      severityDropdown.classList.remove('active')
+    })
 
     // Category selection
     const categoryBtns = document.querySelectorAll('.category-btn')
