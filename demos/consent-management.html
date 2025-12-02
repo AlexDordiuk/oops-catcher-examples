@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Consent Management Demo - Oops Catcher</title>
+  <link rel="stylesheet" href="../assets/css/styles.css">
+</head>
+<body class="bg-gray-50">
+  <!-- Header -->
+  <header class="bg-white shadow-sm sticky top-0 z-10">
+    <div class="container mx-auto px-4 sm:px-6 py-3 sm:py-4 flex items-center justify-between">
+      <a href="../index.html" class="flex items-center gap-2 text-gray-600 hover:text-purple-600 text-sm sm:text-base">
+        <span>←</span>
+        <span class="hidden sm:inline">Back to Examples</span>
+        <span class="sm:hidden">Back</span>
+      </a>
+      <div class="flex items-center gap-2">
+        <img src="../assets/images/icon-only.svg" alt="Oops Catcher" class="h-6 sm:h-8">
+        <span class="font-bold text-base sm:text-xl">Privacy Demo</span>
+      </div>
+      <div class="w-16 sm:w-32"></div>
+    </div>
+  </header>
+
+  <!-- Consent Banner (shown when no consent) -->
+  <div id="consent-banner" class="hidden fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+    <div class="bg-white rounded-2xl shadow-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto">
+      <!-- Header -->
+      <div class="gradient-bg text-white p-4 sm:p-6 rounded-t-2xl">
+        <div class="flex items-center gap-3 mb-2">
+          <span class="text-2xl sm:text-3xl">🔒</span>
+          <h2 class="text-xl sm:text-2xl font-bold">Privacy & Data Collection</h2>
+        </div>
+        <p class="text-sm sm:text-base text-white/90">
+          We respect your privacy. Choose what data you're comfortable sharing.
+        </p>
+      </div>
+
+      <!-- Content -->
+      <div class="p-4 sm:p-6">
+        <div class="mb-4 sm:mb-6">
+          <h3 class="font-semibold text-gray-900 mb-2 flex items-center gap-2 text-sm sm:text-base">
+            <span class="text-purple-500">✓</span>
+            Required Information
+          </h3>
+          <p class="text-xs sm:text-sm text-gray-600 mb-3 sm:mb-4">
+            Essential data needed for bug reports to work properly:
+          </p>
+          <div class="grid sm:grid-cols-2 gap-2 sm:gap-3">
+            <div class="flex items-center gap-2 text-xs sm:text-sm text-gray-700 bg-gray-50 px-3 py-2 rounded-lg">
+              <span class="text-purple-500">✓</span>
+              <span>User Agent</span>
+            </div>
+            <div class="flex items-center gap-2 text-xs sm:text-sm text-gray-700 bg-gray-50 px-3 py-2 rounded-lg">
+              <span class="text-purple-500">✓</span>
+              <span>Platform (OS)</span>
+            </div>
+            <div class="flex items-center gap-2 text-xs sm:text-sm text-gray-700 bg-gray-50 px-3 py-2 rounded-lg">
+              <span class="text-purple-500">✓</span>
+              <span>Screen Resolution</span>
+            </div>
+            <div class="flex items-center gap-2 text-xs sm:text-sm text-gray-700 bg-gray-50 px-3 py-2 rounded-lg">
+              <span class="text-purple-500">✓</span>
+              <span>Viewport Size</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="mb-4 sm:mb-6">
+          <h3 class="font-semibold text-gray-900 mb-3 flex items-center gap-2 text-sm sm:text-base">
+            <span class="text-purple-500">⚙️</span>
+            Optional Information
+          </h3>
+          <p class="text-xs sm:text-sm text-gray-600 mb-3 sm:mb-4">
+            Additional data that helps us debug issues faster:
+          </p>
+          <div class="space-y-2 sm:space-y-3">
+            <label class="flex items-center justify-between p-3 sm:p-4 bg-white border-2 border-gray-200 rounded-lg hover:border-purple-300">
+              <div class="flex items-center gap-2 sm:gap-3">
+                <input type="checkbox" id="consent-language" checked class="w-4 h-4 sm:w-5 sm:h-5 text-purple-600 rounded focus:ring-2 focus:ring-purple-500">
+                <div>
+                  <div class="font-medium text-gray-900 text-xs sm:text-sm">Language Preference</div>
+                  <div class="text-xs text-gray-500">Helps us provide localized support</div>
+                </div>
+              </div>
+            </label>
+
+            <label class="flex items-center justify-between p-3 sm:p-4 bg-white border-2 border-gray-200 rounded-lg hover:border-purple-300">
+              <div class="flex items-center gap-2 sm:gap-3">
+                <input type="checkbox" id="consent-timezone" checked class="w-4 h-4 sm:w-5 sm:h-5 text-purple-600 rounded focus:ring-2 focus:ring-purple-500">
+                <div>
+                  <div class="font-medium text-gray-900 text-xs sm:text-sm">Timezone</div>
+                  <div class="text-xs text-gray-500">For time-sensitive bug reports</div>
+                </div>
+              </div>
+            </label>
+
+            <label class="flex items-center justify-between p-3 sm:p-4 bg-white border-2 border-gray-200 rounded-lg hover:border-purple-300">
+              <div class="flex items-center gap-2 sm:gap-3">
+                <input type="checkbox" id="consent-memory" checked class="w-4 h-4 sm:w-5 sm:h-5 text-purple-600 rounded focus:ring-2 focus:ring-purple-500">
+                <div>
+                  <div class="font-medium text-gray-900 text-xs sm:text-sm">Device Memory</div>
+                  <div class="text-xs text-gray-500">Helps diagnose memory-related issues</div>
+                </div>
+              </div>
+            </label>
+
+            <label class="flex items-center justify-between p-3 sm:p-4 bg-white border-2 border-gray-200 rounded-lg hover:border-purple-300">
+              <div class="flex items-center gap-2 sm:gap-3">
+                <input type="checkbox" id="consent-cores" checked class="w-4 h-4 sm:w-5 sm:h-5 text-purple-600 rounded focus:ring-2 focus:ring-purple-500">
+                <div>
+                  <div class="font-medium text-gray-900 text-xs sm:text-sm">CPU Cores</div>
+                  <div class="text-xs text-gray-500">For performance-related reports</div>
+                </div>
+              </div>
+            </label>
+          </div>
+        </div>
+
+        <div class="bg-purple-50 border border-purple-200 rounded-lg p-3 sm:p-4 mb-4 sm:mb-6">
+          <p class="text-xs sm:text-sm text-purple-800">
+            <strong>Note:</strong> You can revoke consent at any time. Data is stored locally in your browser.
+          </p>
+        </div>
+
+        <button id="accept-consent" class="btn-primary w-full text-base sm:text-lg">
+          Accept & Continue
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Main Content (shown after consent) -->
+  <main id="main-content" class="hidden container mx-auto px-4 sm:px-6 py-6 sm:py-8 max-w-4xl">
+    <!-- Consent Status -->
+    <div id="consent-status" class="card p-4 sm:p-6 mb-6 sm:mb-8 border-purple-200 bg-purple-50/50">
+      <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 sm:gap-0">
+        <div class="flex items-center gap-3">
+          <span class="text-xl sm:text-2xl">✓</span>
+          <div>
+            <div class="font-semibold text-purple-900 text-sm sm:text-base">Consent Granted</div>
+            <div class="text-xs sm:text-sm text-purple-700">Data collection is active</div>
+          </div>
+        </div>
+        <div class="flex gap-2">
+          <button id="view-consent"
+                  class="px-3 sm:px-4 py-2 bg-white text-purple-700 border border-purple-300 rounded-lg hover:bg-purple-50 text-xs sm:text-sm font-medium">
+            View Settings
+          </button>
+          <button id="revoke-consent"
+                  class="px-3 sm:px-4 py-2 bg-purple-100 text-purple-700 rounded-lg hover:bg-purple-200 text-xs sm:text-sm font-medium">
+            Revoke
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Demo Actions -->
+    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 mb-6 sm:mb-8">
+      <button id="show-system-info" class="card p-4 sm:p-6 text-left group">
+        <div class="text-3xl sm:text-4xl mb-2 sm:mb-3">💻</div>
+        <h3 class="font-semibold text-gray-900 mb-2 group-hover:text-purple-600 text-sm sm:text-base">
+          System Info
+        </h3>
+        <p class="text-xs sm:text-sm text-gray-600">
+          View collected data (respecting consent)
+        </p>
+      </button>
+
+      <button id="show-consent-state" class="card p-4 sm:p-6 text-left group">
+        <div class="text-3xl sm:text-4xl mb-2 sm:mb-3">⚙️</div>
+        <h3 class="font-semibold text-gray-900 mb-2 group-hover:text-purple-600 text-sm sm:text-base">
+          Consent State
+        </h3>
+        <p class="text-xs sm:text-sm text-gray-600">
+          View current consent preferences
+        </p>
+      </button>
+
+      <button id="test-report" class="card p-4 sm:p-6 text-left group sm:col-span-2 lg:col-span-1">
+        <div class="text-3xl sm:text-4xl mb-2 sm:mb-3">🐛</div>
+        <h3 class="font-semibold text-gray-900 mb-2 group-hover:text-purple-600 text-sm sm:text-base">
+          Test Report
+        </h3>
+        <p class="text-xs sm:text-sm text-gray-600">
+          Submit a test bug report
+        </p>
+      </button>
+    </div>
+
+    <!-- Info -->
+    <div class="card p-4 sm:p-6 border-purple-200 bg-purple-50/50">
+      <h3 class="text-base sm:text-lg font-semibold text-purple-900 mb-3 flex items-center gap-2">
+        <span>🔒</span>
+        <span>Privacy-First Design</span>
+      </h3>
+      <ul class="space-y-2 text-xs sm:text-sm text-purple-800">
+        <li class="flex items-start gap-2">
+          <span class="text-purple-600 mt-0.5">✓</span>
+          <span><strong>Explicit Consent:</strong> Users must actively grant permission before any data collection</span>
+        </li>
+        <li class="flex items-start gap-2">
+          <span class="text-purple-600 mt-0.5">✓</span>
+          <span><strong>Granular Control:</strong> Users choose exactly what data to share</span>
+        </li>
+        <li class="flex items-start gap-2">
+          <span class="text-purple-600 mt-0.5">✓</span>
+          <span><strong>Revocable:</strong> Consent can be withdrawn at any time</span>
+        </li>
+        <li class="flex items-start gap-2">
+          <span class="text-purple-600 mt-0.5">✓</span>
+          <span><strong>Persistent:</strong> Preferences saved in localStorage and remembered across sessions</span>
+        </li>
+      </ul>
+    </div>
+  </main>
+
+  <!-- Scripts -->
+  <script type="module">
+    import { OopsDemo } from '../assets/js/oops-demo.js'
+    import { ui } from '../assets/js/ui-components.js'
+
+    // Initialize Oops
+    const oops = new OopsDemo({
+      endpoint: '/api/feedback',
+      captureConsole: true
+    })
+
+    window.oops = oops
+    window.ui = ui
+
+    const consentBanner = document.getElementById('consent-banner')
+    const mainContent = document.getElementById('main-content')
+
+    // Check initial consent state
+    if (oops.consent.hasConsent()) {
+      mainContent.classList.remove('hidden')
+    } else {
+      consentBanner.classList.remove('hidden')
+    }
+
+    // Accept consent
+    document.getElementById('accept-consent').addEventListener('click', () => {
+      const preferences = {
+        language: document.getElementById('consent-language').checked,
+        timezone: document.getElementById('consent-timezone').checked,
+        memory: document.getElementById('consent-memory').checked,
+        cores: document.getElementById('consent-cores').checked
+      }
+
+      oops.consent.grantConsent(preferences)
+
+      consentBanner.classList.add('hidden')
+      mainContent.classList.remove('hidden')
+
+      ui.showNotification('Consent granted! Thank you for your trust.', { type: 'success' })
+    })
+
+    // View consent
+    document.getElementById('view-consent').addEventListener('click', () => {
+      consentBanner.classList.remove('hidden')
+    })
+
+    // Revoke consent
+    document.getElementById('revoke-consent').addEventListener('click', () => {
+      if (confirm('Are you sure you want to revoke consent? This will reset your preferences.')) {
+        oops.consent.revokeConsent()
+        mainContent.classList.add('hidden')
+        consentBanner.classList.remove('hidden')
+        ui.showNotification('Consent revoked', { type: 'warning' })
+      }
+    })
+
+    // Show system info
+    document.getElementById('show-system-info').addEventListener('click', () => {
+      try {
+        const info = oops.getSystemInfo()
+        ui.showModal(ui.formatJSON(info), '💻 System Information (Respecting Consent)')
+      } catch (error) {
+        ui.showNotification(error.message, { type: 'error' })
+      }
+    })
+
+    // Show consent state
+    document.getElementById('show-consent-state').addEventListener('click', () => {
+      const state = oops.consent.getConsentState()
+      ui.showModal(ui.formatJSON(state), '⚙️ Consent State')
+    })
+
+    // Test report
+    document.getElementById('test-report').addEventListener('click', async () => {
+      try {
+        const response = await oops.report({
+          message: 'Test bug report from Privacy Demo',
+          description: 'This is a test submission to demonstrate privacy-first data collection',
+          category: 'bug',
+          severity: 'low'
+        })
+
+        if (response.success) {
+          ui.showNotification('Test report submitted!', { type: 'success' })
+
+          const details = ui.formatJSON({
+            response,
+            note: 'System info included because this is a bug report. Check console for full submission.'
+          })
+          ui.showModal(details, '✓ Submission Successful')
+        }
+      } catch (error) {
+        ui.showNotification('Failed: ' + error.message, { type: 'error' })
+      }
+    })
+  </script>
+</body>
+</html>

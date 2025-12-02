@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Quick Start Demo - Oops Catcher</title>
+  <link rel="stylesheet" href="../assets/css/styles.css">
+</head>
+<body class="bg-gray-50 min-h-screen">
+  <!-- Header -->
+  <header class="bg-white shadow-sm sticky top-0 z-10">
+    <div class="container mx-auto px-4 sm:px-6 py-3 sm:py-4 flex items-center justify-between">
+      <a href="../index.html" class="flex items-center gap-2 text-gray-600 hover:text-purple-600 text-sm sm:text-base">
+        <span>←</span>
+        <span class="hidden sm:inline">Back to Examples</span>
+        <span class="sm:hidden">Back</span>
+      </a>
+      <div class="flex items-center gap-2">
+        <img src="../assets/images/icon-only.svg" alt="Oops Catcher" class="h-6 sm:h-8">
+        <span class="font-bold text-base sm:text-xl">Quick Start</span>
+      </div>
+      <div class="w-16 sm:w-32"></div>
+    </div>
+  </header>
+
+  <main class="container mx-auto px-4 sm:px-6 py-6 sm:py-8 max-w-4xl">
+    <!-- Intro -->
+    <div class="card p-4 sm:p-6 mb-6 sm:mb-8 border-purple-200">
+      <h2 class="text-xl sm:text-2xl font-bold text-gray-900 mb-2">👋 Welcome to Quick Start Demo</h2>
+      <p class="text-sm sm:text-base text-gray-600 mb-4">
+        This demo shows the basic usage of Oops Catcher SDK. Try reporting bugs and feedback!
+      </p>
+      <div class="flex flex-wrap gap-2">
+        <span class="badge badge-purple text-xs">No consent needed</span>
+        <span class="badge badge-purple text-xs">Auto console capture</span>
+        <span class="badge badge-purple text-xs">Custom fields</span>
+      </div>
+    </div>
+
+    <!-- Demo Actions -->
+    <div class="grid sm:grid-cols-2 gap-4 sm:gap-6 mb-6 sm:mb-8">
+      <!-- Test Console Capture -->
+      <div class="card p-4 sm:p-6">
+        <h3 class="text-lg sm:text-xl font-semibold mb-2 sm:mb-3 text-gray-900">🐛 Test Console Capture</h3>
+        <p class="text-xs sm:text-sm text-gray-600 mb-3 sm:mb-4">
+          Trigger a test error to see console capture in action.
+        </p>
+        <button id="trigger-error"
+                class="w-full px-4 py-2 sm:py-3 bg-purple-100 text-purple-700 rounded-lg hover:bg-purple-200 font-medium text-sm sm:text-base">
+          Trigger Test Error
+        </button>
+      </div>
+
+      <!-- View Captured Errors -->
+      <div class="card p-4 sm:p-6">
+        <h3 class="text-lg sm:text-xl font-semibold mb-2 sm:mb-3 text-gray-900">📝 View Console Errors</h3>
+        <p class="text-xs sm:text-sm text-gray-600 mb-3 sm:mb-4">
+          See all captured console errors so far.
+        </p>
+        <button id="view-errors"
+                class="w-full px-4 py-2 sm:py-3 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 font-medium text-sm sm:text-base">
+          View Captured Errors
+        </button>
+      </div>
+    </div>
+
+    <!-- Report Form -->
+    <div class="card p-4 sm:p-6 mb-6 sm:mb-8">
+      <h3 class="text-xl sm:text-2xl font-semibold mb-4 sm:mb-6 text-gray-900">📬 Submit a Report</h3>
+
+      <form id="report-form" class="space-y-4 sm:space-y-6">
+        <!-- Category Tabs -->
+        <div>
+          <label class="block text-xs sm:text-sm font-medium text-gray-700 mb-2">Report Type</label>
+          <div class="flex gap-2 flex-wrap">
+            <button type="button" data-category="bug"
+                    class="category-btn px-3 sm:px-4 py-2 rounded-lg border-2 border-purple-300 bg-purple-50 text-purple-700 font-medium hover:bg-purple-100 text-xs sm:text-sm">
+              🐛 Bug
+            </button>
+            <button type="button" data-category="feedback"
+                    class="category-btn px-3 sm:px-4 py-2 rounded-lg border-2 border-gray-200 text-gray-600 hover:bg-gray-50 text-xs sm:text-sm">
+              💬 Feedback
+            </button>
+            <button type="button" data-category="question"
+                    class="category-btn px-3 sm:px-4 py-2 rounded-lg border-2 border-gray-200 text-gray-600 hover:bg-gray-50 text-xs sm:text-sm">
+              ❓ Question
+            </button>
+          </div>
+          <input type="hidden" id="category" value="bug">
+        </div>
+
+        <!-- Severity (only for bugs) -->
+        <div id="severity-container">
+          <label for="severity" class="block text-xs sm:text-sm font-medium text-gray-700 mb-2">Severity</label>
+          <select id="severity"
+                  class="w-full px-3 sm:px-4 py-2 sm:py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent text-sm sm:text-base">
+            <option value="low">Low - Minor issue</option>
+            <option value="medium" selected>Medium - Affects functionality</option>
+            <option value="high">High - Blocks important features</option>
+            <option value="critical">Critical - System is unusable</option>
+          </select>
+        </div>
+
+        <!-- Message -->
+        <div>
+          <label for="message" class="block text-xs sm:text-sm font-medium text-gray-700 mb-2">
+            Title <span class="text-purple-600">*</span>
+          </label>
+          <input type="text" id="message" required
+                 placeholder="Brief description..."
+                 class="w-full px-3 sm:px-4 py-2 sm:py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent text-sm sm:text-base">
+        </div>
+
+        <!-- Description -->
+        <div>
+          <label for="description" class="block text-xs sm:text-sm font-medium text-gray-700 mb-2">
+            Description
+          </label>
+          <textarea id="description" rows="3" class="resize-none"
+                    placeholder="Detailed description..."
+                    class="w-full px-3 sm:px-4 py-2 sm:py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent text-sm sm:text-base"></textarea>
+        </div>
+
+        <!-- Custom Fields -->
+        <div>
+          <label class="block text-xs sm:text-sm font-medium text-gray-700 mb-2">
+            Custom Fields (optional)
+          </label>
+          <div id="custom-fields-container" class="space-y-2 mb-3">
+            <div class="flex gap-2 items-center">
+              <input type="text" placeholder="Key (e.g., orderId)"
+                     class="custom-key flex-1 px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent text-xs sm:text-sm">
+              <input type="text" placeholder="Value (e.g., ORD-123)"
+                     class="custom-value flex-1 px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent text-xs sm:text-sm">
+            </div>
+          </div>
+          <button type="button" id="add-custom-field"
+                  class="px-3 sm:px-4 py-2 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 text-xs sm:text-sm font-medium">
+            + Add Field
+          </button>
+        </div>
+
+        <!-- Submit Button -->
+        <button type="submit" class="btn-primary w-full text-base sm:text-lg">
+          Submit Report
+        </button>
+      </form>
+    </div>
+
+    <!-- Info Panel -->
+    <div class="card p-4 sm:p-6 border-purple-200 bg-purple-50/50">
+      <h3 class="text-base sm:text-lg font-semibold text-purple-900 mb-2">💡 Smart Data Collection</h3>
+      <p class="text-xs sm:text-sm text-purple-800">
+        <strong>Bug reports</strong> include system info and console errors.
+        <strong>Feedback/Questions</strong> only send your message - no technical data collected!
+      </p>
+    </div>
+  </main>
+
+  <!-- Scripts -->
+  <script type="module">
+    import { OopsDemo } from '../assets/js/oops-demo.js'
+    import { ui } from '../assets/js/ui-components.js'
+
+    // Initialize Oops
+    const oops = new OopsDemo({
+      endpoint: '/api/feedback',
+      captureConsole: true,
+      maxConsoleErrors: 20
+    })
+
+    // Make it globally accessible for demo
+    window.oops = oops
+    window.ui = ui
+
+    // Category selection
+    const categoryBtns = document.querySelectorAll('.category-btn')
+    const categoryInput = document.getElementById('category')
+    const severityContainer = document.getElementById('severity-container')
+
+    categoryBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const category = btn.dataset.category
+
+        // Update UI
+        categoryBtns.forEach(b => {
+          b.classList.remove('bg-purple-50', 'border-purple-300', 'text-purple-700')
+          b.classList.add('border-gray-200', 'text-gray-600')
+        })
+
+        btn.classList.remove('border-gray-200', 'text-gray-600')
+        btn.classList.add('bg-purple-50', 'border-purple-300', 'text-purple-700')
+
+        severityContainer.style.display = category === 'bug' ? 'block' : 'none'
+        categoryInput.value = category
+      })
+    })
+
+    // Add custom field
+    document.getElementById('add-custom-field').addEventListener('click', () => {
+      ui.addCustomField('custom-fields-container')
+    })
+
+    // Trigger error
+    document.getElementById('trigger-error').addEventListener('click', () => {
+      console.error('Test error: Button clicked at ' + new Date().toISOString())
+      ui.showNotification('Test error logged to console!', { type: 'success' })
+    })
+
+    // View errors
+    document.getElementById('view-errors').addEventListener('click', () => {
+      const errors = oops.getConsoleErrors()
+      const content = errors.length > 0
+        ? ui.formatJSON(errors)
+        : '<p class="text-gray-600">No console errors captured yet. Click "Trigger Test Error" to create one!</p>'
+
+      ui.showModal(content, `Console Errors (${errors.length})`)
+    })
+
+    // Form submission
+    document.getElementById('report-form').addEventListener('submit', async (e) => {
+      e.preventDefault()
+
+      const category = categoryInput.value
+      const customFields = ui.collectCustomFields('custom-fields-container')
+
+      const userReport = {
+        message: document.getElementById('message').value,
+        description: document.getElementById('description').value || undefined,
+        category: category,
+        severity: category === 'bug' ? document.getElementById('severity').value : undefined,
+        custom: Object.keys(customFields).length > 0 ? customFields : undefined
+      }
+
+      try {
+        const response = await oops.report(userReport)
+
+        if (response.success) {
+          ui.showNotification('Report submitted successfully!', { type: 'success' })
+
+          // Show submission details
+          const details = ui.formatJSON({
+            report: userReport,
+            response: response,
+            note: category === 'bug'
+              ? 'Includes system info & console errors'
+              : 'Only user message sent (no system info)'
+          })
+          ui.showModal(details, '✓ Submission Successful')
+
+          // Reset form
+          e.target.reset()
+          categoryInput.value = 'bug'
+          document.querySelector('[data-category="bug"]').click()
+        }
+      } catch (error) {
+        ui.showNotification('Failed to submit report: ' + error.message, { type: 'error' })
+      }
+    })
+  </script>
+</body>
+</html>

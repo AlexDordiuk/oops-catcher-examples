@@ -1,285 +1,223 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>🪰 Oops Catcher - Interactive Demos</title>
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
-    body {
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-      background: linear-gradient(135deg, #1e3a8a 0%, #7c3aed 100%);
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 20px;
-    }
-
-    .container {
-      max-width: 1000px;
-      width: 100%;
-    }
-
-    .header {
-      text-align: center;
-      color: white;
-      margin-bottom: 50px;
-    }
-
-    .header .logo {
-      font-size: 80px;
-      margin-bottom: 10px;
-    }
-
-    .header h1 {
-      font-size: 48px;
-      margin-bottom: 10px;
-      font-weight: 700;
-    }
-
-    .header p {
-      font-size: 20px;
-      opacity: 0.9;
-    }
-
-    .demos {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
-      gap: 30px;
-      margin-bottom: 40px;
-    }
-
-    .demo-card {
-      background: white;
-      border-radius: 16px;
-      padding: 40px;
-      box-shadow: 0 20px 60px rgba(0,0,0,0.3);
-      transition: transform 0.3s, box-shadow 0.3s;
-      cursor: pointer;
-      text-decoration: none;
-      color: inherit;
-      display: block;
-    }
-
-    .demo-card:hover {
-      transform: translateY(-8px);
-      box-shadow: 0 30px 80px rgba(0,0,0,0.4);
-    }
-
-    .demo-card .icon {
-      width: 60px;
-      height: 60px;
-      background: linear-gradient(135deg, #1e3a8a 0%, #7c3aed 100%);
-      border-radius: 12px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 30px;
-      margin-bottom: 20px;
-    }
-
-    .demo-card h2 {
-      color: #1e3a8a;
-      font-size: 24px;
-      margin-bottom: 10px;
-    }
-
-    .demo-card p {
-      color: #666;
-      line-height: 1.6;
-      margin-bottom: 20px;
-    }
-
-    .demo-card .features {
-      list-style: none;
-      margin-bottom: 20px;
-    }
-
-    .demo-card .features li {
-      color: #555;
-      padding: 8px 0;
-      padding-left: 24px;
-      position: relative;
-      font-size: 14px;
-    }
-
-    .demo-card .features li:before {
-      content: "✓";
-      position: absolute;
-      left: 0;
-      color: #7c3aed;
-      font-weight: bold;
-    }
-
-    .demo-card .badge {
-      display: inline-block;
-      padding: 4px 12px;
-      border-radius: 20px;
-      font-size: 12px;
-      font-weight: 600;
-      margin-top: 10px;
-    }
-
-    .badge.quick {
-      background: #e3f2fd;
-      color: #1976d2;
-    }
-
-    .badge.production {
-      background: #e8f5e9;
-      color: #388e3c;
-    }
-
-    .badge.gdpr {
-      background: #fff3e0;
-      color: #f57c00;
-    }
-
-    .cta {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 12px 24px;
-      background: linear-gradient(135deg, #1e3a8a 0%, #7c3aed 100%);
-      color: white;
-      border-radius: 8px;
-      font-weight: 600;
-      margin-top: 10px;
-      transition: transform 0.2s;
-    }
-
-    .demo-card:hover .cta {
-      transform: translateX(4px);
-    }
-
-    .footer {
-      text-align: center;
-      color: white;
-      opacity: 0.9;
-    }
-
-    .footer a {
-      color: white;
-      text-decoration: underline;
-      font-weight: 600;
-    }
-
-    .footer p {
-      margin-bottom: 10px;
-    }
-
-    .tech-stack {
-      display: flex;
-      gap: 10px;
-      flex-wrap: wrap;
-      margin-top: 15px;
-    }
-
-    .tech-badge {
-      background: #f5f5f5;
-      color: #333;
-      padding: 4px 10px;
-      border-radius: 6px;
-      font-size: 12px;
-      font-weight: 500;
-    }
-
-    @media (max-width: 768px) {
-      .demos {
-        grid-template-columns: 1fr;
-      }
-
-      .header h1 {
-        font-size: 36px;
-      }
-
-      .header p {
-        font-size: 16px;
-      }
-    }
-  </style>
+  <title>Oops Catcher - Live Demos</title>
+  <meta name="description" content="Interactive demos for Oops Catcher SDK - A lightweight feedback collector">
+  <link rel="stylesheet" href="./assets/css/styles.css">
 </head>
-<body>
-  <div class="container">
-    <div class="header">
-      <div class="logo">🪰</div>
-      <h1>Oops Catcher</h1>
-      <p>Catch errors and user feedback in one click</p>
-    </div>
-
-    <div class="demos">
-      <!-- Simple Demo -->
-      <a href="vanilla-demo.html" class="demo-card">
-        <div class="icon">⚡</div>
-        <h2>Quick Start Demo</h2>
-        <p>Simple demonstration with the new Oops.catch() and Oops.report() API.</p>
-
-        <ul class="features">
-          <li>Oops.catch() for try-catch blocks</li>
-          <li>Oops.report() for user feedback</li>
-          <li>Auto console log capture</li>
-          <li>System info collection</li>
-          <li>Real-time preview</li>
-        </ul>
-
-        <div class="tech-stack">
-          <span class="tech-badge">Vanilla JS</span>
-          <span class="tech-badge">~12KB</span>
-          <span class="tech-badge">No Build</span>
+<body class="bg-gray-50 min-h-screen">
+  <!-- Hero Section -->
+  <header class="gradient-bg text-white">
+    <nav class="container mx-auto px-4 sm:px-6 py-4 sm:py-6">
+      <div class="flex items-center justify-between">
+        <img src="./assets/images/logo.svg" alt="Oops Catcher" class="h-10 sm:h-12">
+        <div class="flex gap-2 sm:gap-4">
+          <a href="https://github.com/AlexDordiuk/oops-catcher"
+             class="px-3 sm:px-4 py-2 bg-white/10 hover:bg-white/20 rounded-lg text-sm sm:text-base backdrop-blur-sm">
+            GitHub
+          </a>
+          <a href="https://github.com/AlexDordiuk/oops-catcher#readme"
+             class="px-3 sm:px-4 py-2 bg-white/10 hover:bg-white/20 rounded-lg text-sm sm:text-base backdrop-blur-sm">
+            Docs
+          </a>
         </div>
+      </div>
+    </nav>
 
-        <span class="badge quick">Quick Start</span>
-
-        <div class="cta">
-          Try Demo
-          <span>→</span>
-        </div>
-      </a>
-
-      <!-- Consent Demo -->
-      <a href="vanilla-demo-with-consent.html" class="demo-card">
-        <div class="icon">🔒</div>
-        <h2>Privacy-First Demo</h2>
-        <p>Production-ready example with full consent management and GDPR compliance.</p>
-
-        <ul class="features">
-          <li>Consent banner with granular controls</li>
-          <li>Required vs optional data fields</li>
-          <li>LocalStorage persistence</li>
-          <li>Revocable permissions</li>
-          <li>Privacy-first approach</li>
-        </ul>
-
-        <div class="tech-stack">
-          <span class="tech-badge">Vanilla JS</span>
-          <span class="tech-badge">~20KB</span>
-          <span class="tech-badge">GDPR Ready</span>
-        </div>
-
-        <span class="badge production">Production Ready</span>
-        <span class="badge gdpr">GDPR Compliant</span>
-
-        <div class="cta">
-          Try Demo
-          <span>→</span>
-        </div>
-      </a>
-    </div>
-
-    <div class="footer">
-      <p><strong>Choose your demo based on your needs:</strong></p>
-      <p>Quick Start for rapid prototyping • Privacy-First for production apps</p>
-      <p style="margin-top: 20px;">
-        <a href="https://github.com/oleksandrdorduk/oops-catcher" target="_blank">View on GitHub</a> •
-        <a href="../README.md">Documentation</a>
+    <div class="container mx-auto px-4 sm:px-6 py-12 sm:py-20 text-center">
+      <h1 class="text-3xl sm:text-5xl md:text-6xl font-bold mb-4 sm:mb-6">
+        Interactive Demos
+      </h1>
+      <p class="text-base sm:text-xl md:text-2xl mb-6 sm:mb-8 text-white/90 max-w-2xl mx-auto px-4">
+        See Oops Catcher in action. Try out different features and explore the API.
       </p>
+      <div class="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center items-center px-4">
+        <a href="#demos" class="btn-secondary w-full sm:w-auto text-center">
+          View Demos
+        </a>
+        <a href="https://github.com/AlexDordiuk/oops-catcher"
+           class="w-full sm:w-auto text-center px-6 py-3 bg-white/10 backdrop-blur-sm text-white rounded-lg font-medium border-2 border-white/30 hover:bg-white/20">
+          Get Started
+        </a>
+      </div>
     </div>
-  </div>
+  </header>
+
+  <!-- Features Section -->
+  <section class="py-12 sm:py-20 bg-white">
+    <div class="container mx-auto px-4 sm:px-6">
+      <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold text-center mb-8 sm:mb-12 text-gray-900">
+        Why Oops Catcher?
+      </h2>
+      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8">
+        <div class="card p-6">
+          <div class="text-3xl sm:text-4xl mb-3 sm:mb-4">🎯</div>
+          <h3 class="text-lg sm:text-xl font-semibold mb-2 sm:mb-3 text-gray-900">Simple API</h3>
+          <p class="text-sm sm:text-base text-gray-600">
+            Just <code>Oops.init()</code>, <code>Oops.catch()</code>, and <code>Oops.report()</code>
+          </p>
+        </div>
+
+        <div class="card p-6">
+          <div class="text-3xl sm:text-4xl mb-3 sm:mb-4">🔒</div>
+          <h3 class="text-lg sm:text-xl font-semibold mb-2 sm:mb-3 text-gray-900">Privacy-First</h3>
+          <p class="text-sm sm:text-base text-gray-600">
+            Built-in consent management with GDPR compliance. Users control what data is shared.
+          </p>
+        </div>
+
+        <div class="card p-6">
+          <div class="text-3xl sm:text-4xl mb-3 sm:mb-4">📊</div>
+          <h3 class="text-lg sm:text-xl font-semibold mb-2 sm:mb-3 text-gray-900">Smart Collection</h3>
+          <p class="text-sm sm:text-base text-gray-600">
+            System info only for bugs, not for feedback. Respects user privacy automatically.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Demos Section -->
+  <section id="demos" class="py-12 sm:py-20 bg-gray-50">
+    <div class="container mx-auto px-4 sm:px-6">
+      <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold text-center mb-8 sm:mb-12 text-gray-900">
+        Live Demos
+      </h2>
+      <div class="grid md:grid-cols-2 gap-4 sm:gap-6 lg:gap-8 max-w-5xl mx-auto">
+        <!-- Quick Start Demo -->
+        <a href="./demos/quick-start.html" class="card p-6 sm:p-8 group block">
+          <div class="flex items-start justify-between mb-4">
+            <div class="text-4xl sm:text-5xl">⚡</div>
+            <span class="badge badge-success">
+              Beginner
+            </span>
+          </div>
+          <h3 class="text-xl sm:text-2xl font-bold mb-2 sm:mb-3 text-gray-900 group-hover:text-purple-600">
+            Quick Start
+          </h3>
+          <p class="text-sm sm:text-base text-gray-600 mb-4">
+            Get started quickly with basic bug reporting and feedback collection.
+          </p>
+          <ul class="space-y-2 text-xs sm:text-sm text-gray-600 mb-4 sm:mb-6">
+            <li class="flex items-center gap-2">
+              <span class="text-purple-500">✓</span>
+              Bug reporting with custom fields
+            </li>
+            <li class="flex items-center gap-2">
+              <span class="text-purple-500">✓</span>
+              Feedback & questions
+            </li>
+            <li class="flex items-center gap-2">
+              <span class="text-purple-500">✓</span>
+              Console error capture
+            </li>
+          </ul>
+          <div class="flex items-center text-purple-600 font-medium group-hover:translate-x-2">
+            <span>Try Demo</span>
+            <span class="ml-2">→</span>
+          </div>
+        </a>
+
+        <!-- Privacy Demo -->
+        <a href="./demos/consent-management.html" class="card p-6 sm:p-8 group block">
+          <div class="flex items-start justify-between mb-4">
+            <div class="text-4xl sm:text-5xl">🔒</div>
+            <span class="badge badge-purple">
+              Advanced
+            </span>
+          </div>
+          <h3 class="text-xl sm:text-2xl font-bold mb-2 sm:mb-3 text-gray-900 group-hover:text-purple-600">
+            Consent Management
+          </h3>
+          <p class="text-sm sm:text-base text-gray-600 mb-4">
+            Production-ready example with full privacy controls and GDPR compliance.
+          </p>
+          <ul class="space-y-2 text-xs sm:text-sm text-gray-600 mb-4 sm:mb-6">
+            <li class="flex items-center gap-2">
+              <span class="text-purple-500">✓</span>
+              Consent banner UI
+            </li>
+            <li class="flex items-center gap-2">
+              <span class="text-purple-500">✓</span>
+              Granular permissions
+            </li>
+            <li class="flex items-center gap-2">
+              <span class="text-purple-500">✓</span>
+              Persistent preferences
+            </li>
+          </ul>
+          <div class="flex items-center text-purple-600 font-medium group-hover:translate-x-2">
+            <span>Try Demo</span>
+            <span class="ml-2">→</span>
+          </div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Installation Section -->
+  <section class="py-12 sm:py-20 bg-white">
+    <div class="container mx-auto px-4 sm:px-6 max-w-4xl">
+      <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold text-center mb-8 sm:mb-12 text-gray-900">
+        Quick Installation
+      </h2>
+      <div class="bg-gray-900 text-gray-100 p-4 sm:p-6 rounded-xl overflow-x-auto">
+        <pre class="text-xs sm:text-sm"><code>npm install oops-catcher
+# or
+bun add oops-catcher</code></pre>
+      </div>
+
+      <div class="mt-6 sm:mt-8 card p-4 sm:p-6">
+        <h3 class="text-lg sm:text-xl font-semibold mb-3 sm:mb-4 text-gray-900">Basic Usage</h3>
+        <div class="bg-gray-900 text-gray-100 p-4 rounded-lg overflow-x-auto">
+          <pre class="text-xs sm:text-sm"><code>import Oops from 'oops-catcher'
+
+// Initialize
+Oops.init({
+  endpoint: '/api/feedback',
+  captureConsole: true
+})
+
+// Report a bug
+Oops.report({
+  message: "Button doesn't work",
+  category: 'bug',
+  severity: 'high'
+})</code></pre>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-gray-900 text-white py-8 sm:py-12">
+    <div class="container mx-auto px-4 sm:px-6 text-center">
+      <div class="flex items-center justify-center gap-3 mb-4 sm:mb-6">
+        <img src="./assets/images/logo.svg" alt="Oops Catcher" class="h-10 sm:h-12">
+      </div>
+      <p class="text-sm sm:text-base text-gray-400 mb-4 sm:mb-6 px-4">
+        A lightweight feedback collector that captures console logs, user agent info, and user reports.
+      </p>
+      <div class="flex flex-wrap gap-4 sm:gap-6 justify-center text-sm sm:text-base">
+        <a href="https://github.com/AlexDordiuk/oops-catcher"
+           class="text-gray-400 hover:text-white">
+          GitHub
+        </a>
+        <a href="https://github.com/AlexDordiuk/oops-catcher#readme"
+           class="text-gray-400 hover:text-white">
+          Documentation
+        </a>
+        <a href="https://github.com/AlexDordiuk/oops-catcher-examples"
+           class="text-gray-400 hover:text-white">
+          Examples Repo
+        </a>
+      </div>
+      <div class="mt-6 sm:mt-8 text-xs sm:text-sm text-gray-500">
+        Made with ❤️ by <a href="https://github.com/AlexDordiuk" class="text-gray-400 hover:text-white">Oleksandr Dordiuk</a>
+      </div>
+    </div>
+  </footer>
 </body>
 </html>

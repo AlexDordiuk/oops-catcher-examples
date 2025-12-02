@@ -1,0 +1,15 @@
+{
+  "name": "oops-catcher-examples",
+  "version": "1.0.0",
+  "description": "Live examples and demos for Oops Catcher SDK",
+  "scripts": {
+    "build": "bun build src/*.ts --outdir assets/js --minify --sourcemap=external && bun run build:css",
+    "build:css": "bunx @tailwindcss/cli -i ./src/styles.css -o ./assets/css/styles.css --minify",
+    "dev": "bun build src/*.ts --outdir assets/js --watch",
+    "dev:css": "bunx @tailwindcss/cli -i ./src/styles.css -o ./assets/css/styles.css --watch"
+  },
+  "devDependencies": {
+    "@tailwindcss/vite": "^4.1.0",
+    "tailwindcss": "^4.1.0"
+  }
+}

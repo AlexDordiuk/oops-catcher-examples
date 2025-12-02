@@ -1,0 +1,95 @@
+@import "tailwindcss";
+
+@theme {
+  --color-primary: #667eea;
+  --color-primary-dark: #764ba2;
+  --color-accent: #8b7dd8;
+  --color-light: #f8f7ff;
+  --color-success: #667eea;
+  --color-error: #764ba2;
+  --color-warning: #8b7dd8;
+}
+
+@source "../**/*.html";
+
+/* Smooth transitions */
+* {
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 200ms;
+}
+
+/* Custom gradient backgrounds */
+.gradient-bg {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+.gradient-subtle {
+  background: linear-gradient(135deg, #f8f7ff 0%, #ffffff 100%);
+}
+
+/* Glass morphism effect */
+.glass {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+/* Code blocks */
+pre {
+  @apply bg-gray-900 text-gray-100 p-4 rounded-lg overflow-x-auto;
+}
+
+code {
+  @apply bg-gray-100 text-gray-800 px-1 py-0.5 rounded text-sm;
+}
+
+/* Interactive elements cursor */
+button,
+a,
+input[type="checkbox"],
+input[type="radio"],
+label,
+select,
+.cursor-pointer {
+  cursor: pointer;
+}
+
+/* Card styles */
+.card {
+  @apply bg-white rounded-xl shadow-sm border border-gray-100 transition-all duration-300;
+}
+
+.card:hover {
+  @apply shadow-lg border-purple-100;
+}
+
+/* Button styles */
+.btn-primary {
+  @apply px-6 py-3 bg-gradient-to-r from-purple-500 to-purple-600 text-white rounded-lg font-medium shadow-sm;
+}
+
+.btn-primary:hover {
+  @apply shadow-md from-purple-600 to-purple-700;
+}
+
+.btn-secondary {
+  @apply px-6 py-3 bg-white text-purple-600 rounded-lg font-medium border-2 border-purple-200;
+}
+
+.btn-secondary:hover {
+  @apply bg-purple-50 border-purple-300;
+}
+
+/* Badge styles */
+.badge {
+  @apply px-3 py-1 rounded-full text-xs font-medium;
+}
+
+.badge-purple {
+  @apply bg-purple-100 text-purple-700;
+}
+
+.badge-success {
+  @apply bg-purple-50 text-purple-600;
+}
