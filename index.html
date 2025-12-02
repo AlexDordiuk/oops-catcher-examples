@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>🪰 Oops Catcher - Interactive Demos</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+      background: linear-gradient(135deg, #1e3a8a 0%, #7c3aed 100%);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .container {
+      max-width: 1000px;
+      width: 100%;
+    }
+
+    .header {
+      text-align: center;
+      color: white;
+      margin-bottom: 50px;
+    }
+
+    .header .logo {
+      font-size: 80px;
+      margin-bottom: 10px;
+    }
+
+    .header h1 {
+      font-size: 48px;
+      margin-bottom: 10px;
+      font-weight: 700;
+    }
+
+    .header p {
+      font-size: 20px;
+      opacity: 0.9;
+    }
+
+    .demos {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+      gap: 30px;
+      margin-bottom: 40px;
+    }
+
+    .demo-card {
+      background: white;
+      border-radius: 16px;
+      padding: 40px;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+      transition: transform 0.3s, box-shadow 0.3s;
+      cursor: pointer;
+      text-decoration: none;
+      color: inherit;
+      display: block;
+    }
+
+    .demo-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 30px 80px rgba(0,0,0,0.4);
+    }
+
+    .demo-card .icon {
+      width: 60px;
+      height: 60px;
+      background: linear-gradient(135deg, #1e3a8a 0%, #7c3aed 100%);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 30px;
+      margin-bottom: 20px;
+    }
+
+    .demo-card h2 {
+      color: #1e3a8a;
+      font-size: 24px;
+      margin-bottom: 10px;
+    }
+
+    .demo-card p {
+      color: #666;
+      line-height: 1.6;
+      margin-bottom: 20px;
+    }
+
+    .demo-card .features {
+      list-style: none;
+      margin-bottom: 20px;
+    }
+
+    .demo-card .features li {
+      color: #555;
+      padding: 8px 0;
+      padding-left: 24px;
+      position: relative;
+      font-size: 14px;
+    }
+
+    .demo-card .features li:before {
+      content: "✓";
+      position: absolute;
+      left: 0;
+      color: #7c3aed;
+      font-weight: bold;
+    }
+
+    .demo-card .badge {
+      display: inline-block;
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 600;
+      margin-top: 10px;
+    }
+
+    .badge.quick {
+      background: #e3f2fd;
+      color: #1976d2;
+    }
+
+    .badge.production {
+      background: #e8f5e9;
+      color: #388e3c;
+    }
+
+    .badge.gdpr {
+      background: #fff3e0;
+      color: #f57c00;
+    }
+
+    .cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 12px 24px;
+      background: linear-gradient(135deg, #1e3a8a 0%, #7c3aed 100%);
+      color: white;
+      border-radius: 8px;
+      font-weight: 600;
+      margin-top: 10px;
+      transition: transform 0.2s;
+    }
+
+    .demo-card:hover .cta {
+      transform: translateX(4px);
+    }
+
+    .footer {
+      text-align: center;
+      color: white;
+      opacity: 0.9;
+    }
+
+    .footer a {
+      color: white;
+      text-decoration: underline;
+      font-weight: 600;
+    }
+
+    .footer p {
+      margin-bottom: 10px;
+    }
+
+    .tech-stack {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-top: 15px;
+    }
+
+    .tech-badge {
+      background: #f5f5f5;
+      color: #333;
+      padding: 4px 10px;
+      border-radius: 6px;
+      font-size: 12px;
+      font-weight: 500;
+    }
+
+    @media (max-width: 768px) {
+      .demos {
+        grid-template-columns: 1fr;
+      }
+
+      .header h1 {
+        font-size: 36px;
+      }
+
+      .header p {
+        font-size: 16px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <div class="logo">🪰</div>
+      <h1>Oops Catcher</h1>
+      <p>Catch errors and user feedback in one click</p>
+    </div>
+
+    <div class="demos">
+      <!-- Simple Demo -->
+      <a href="vanilla-demo.html" class="demo-card">
+        <div class="icon">⚡</div>
+        <h2>Quick Start Demo</h2>
+        <p>Simple demonstration with the new Oops.catch() and Oops.report() API.</p>
+
+        <ul class="features">
+          <li>Oops.catch() for try-catch blocks</li>
+          <li>Oops.report() for user feedback</li>
+          <li>Auto console log capture</li>
+          <li>System info collection</li>
+          <li>Real-time preview</li>
+        </ul>
+
+        <div class="tech-stack">
+          <span class="tech-badge">Vanilla JS</span>
+          <span class="tech-badge">~12KB</span>
+          <span class="tech-badge">No Build</span>
+        </div>
+
+        <span class="badge quick">Quick Start</span>
+
+        <div class="cta">
+          Try Demo
+          <span>→</span>
+        </div>
+      </a>
+
+      <!-- Consent Demo -->
+      <a href="vanilla-demo-with-consent.html" class="demo-card">
+        <div class="icon">🔒</div>
+        <h2>Privacy-First Demo</h2>
+        <p>Production-ready example with full consent management and GDPR compliance.</p>
+
+        <ul class="features">
+          <li>Consent banner with granular controls</li>
+          <li>Required vs optional data fields</li>
+          <li>LocalStorage persistence</li>
+          <li>Revocable permissions</li>
+          <li>Privacy-first approach</li>
+        </ul>
+
+        <div class="tech-stack">
+          <span class="tech-badge">Vanilla JS</span>
+          <span class="tech-badge">~20KB</span>
+          <span class="tech-badge">GDPR Ready</span>
+        </div>
+
+        <span class="badge production">Production Ready</span>
+        <span class="badge gdpr">GDPR Compliant</span>
+
+        <div class="cta">
+          Try Demo
+          <span>→</span>
+        </div>
+      </a>
+    </div>
+
+    <div class="footer">
+      <p><strong>Choose your demo based on your needs:</strong></p>
+      <p>Quick Start for rapid prototyping • Privacy-First for production apps</p>
+      <p style="margin-top: 20px;">
+        <a href="https://github.com/oleksandrdorduk/oops-catcher" target="_blank">View on GitHub</a> •
+        <a href="../README.md">Documentation</a>
+      </p>
+    </div>
+  </div>
+</body>
+</html>

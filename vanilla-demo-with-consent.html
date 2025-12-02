@@ -1,0 +1,839 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>🪰 Oops Catcher - Privacy Demo</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .container {
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+      max-width: 600px;
+      width: 100%;
+      padding: 40px;
+    }
+
+    h1 {
+      color: #667eea;
+      margin-bottom: 10px;
+      font-size: 28px;
+    }
+
+    .subtitle {
+      color: #666;
+      margin-bottom: 30px;
+      font-size: 14px;
+    }
+
+    .consent-banner {
+      background: #f8f9fa;
+      border: 2px solid #667eea;
+      border-radius: 8px;
+      padding: 20px;
+      margin-bottom: 30px;
+    }
+
+    .consent-banner h3 {
+      color: #667eea;
+      margin-bottom: 10px;
+      font-size: 18px;
+    }
+
+    .consent-banner p {
+      color: #666;
+      margin-bottom: 15px;
+      line-height: 1.5;
+    }
+
+    .consent-options {
+      margin: 15px 0;
+    }
+
+    .consent-option {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px;
+      margin-bottom: 8px;
+      background: white;
+      border-radius: 6px;
+    }
+
+    .consent-option label {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      cursor: pointer;
+      flex: 1;
+    }
+
+    .consent-option input[type="checkbox"] {
+      width: 18px;
+      height: 18px;
+      cursor: pointer;
+    }
+
+    .consent-option input[type="checkbox"]:disabled {
+      cursor: not-allowed;
+    }
+
+    .consent-option .required-badge {
+      background: #e74c3c;
+      color: white;
+      font-size: 10px;
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-weight: 600;
+    }
+
+    .consent-option-desc {
+      font-size: 12px;
+      color: #999;
+      margin-left: 28px;
+    }
+
+    .consent-actions {
+      display: flex;
+      gap: 10px;
+      margin-top: 15px;
+    }
+
+    .btn {
+      padding: 12px 24px;
+      border: none;
+      border-radius: 8px;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      flex: 1;
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+    }
+
+    .btn-secondary {
+      padding: 10px 20px;
+      background: #f5f5f5;
+      color: #333;
+      border: 2px solid #e0e0e0;
+      border-radius: 8px;
+      font-size: 14px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .btn-secondary:hover {
+      background: #e0e0e0;
+      border-color: #ccc;
+    }
+
+    .consent-status {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 12px;
+      background: #f8f9fa;
+      border-radius: 8px;
+      margin-bottom: 20px;
+    }
+
+    .consent-status.granted {
+      background: #d4edda;
+      border: 1px solid #c3e6cb;
+    }
+
+    .consent-status.revoked {
+      background: #f8d7da;
+      border: 1px solid #f5c6cb;
+    }
+
+    .status-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+    }
+
+    .status-dot.green {
+      background: #28a745;
+    }
+
+    .status-dot.red {
+      background: #dc3545;
+    }
+
+    .tabs {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 30px;
+      border-bottom: 2px solid #eee;
+    }
+
+    .tab {
+      padding: 12px 24px;
+      border: none;
+      background: none;
+      cursor: pointer;
+      color: #666;
+      font-size: 16px;
+      transition: all 0.3s;
+      border-bottom: 3px solid transparent;
+      margin-bottom: -2px;
+    }
+
+    .tab:hover {
+      color: #667eea;
+    }
+
+    .tab.active {
+      color: #667eea;
+      border-bottom-color: #667eea;
+      font-weight: 600;
+    }
+
+    .tab-content {
+      display: none;
+    }
+
+    .tab-content.active {
+      display: block;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 8px;
+      color: #333;
+      font-weight: 500;
+      font-size: 14px;
+    }
+
+    input, textarea, select {
+      width: 100%;
+      padding: 12px;
+      border: 2px solid #e0e0e0;
+      border-radius: 8px;
+      font-size: 14px;
+      font-family: inherit;
+      transition: border-color 0.3s;
+    }
+
+    input:focus, textarea:focus, select:focus {
+      outline: none;
+      border-color: #667eea;
+    }
+
+    textarea {
+      resize: vertical;
+      min-height: 100px;
+    }
+
+    button[type="submit"] {
+      width: 100%;
+      padding: 14px;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    button[type="submit"]:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+    }
+
+    button[type="submit"]:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    .demo-actions {
+      margin-top: 30px;
+      padding-top: 30px;
+      border-top: 2px solid #eee;
+    }
+
+    .demo-actions h3 {
+      color: #333;
+      margin-bottom: 15px;
+      font-size: 16px;
+    }
+
+    .btn-group {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .info-panel {
+      margin-top: 20px;
+      padding: 15px;
+      background: #f8f9fa;
+      border-radius: 8px;
+      border-left: 4px solid #667eea;
+    }
+
+    .info-panel h4 {
+      color: #667eea;
+      margin-bottom: 10px;
+      font-size: 14px;
+    }
+
+    .info-panel pre {
+      background: #fff;
+      padding: 10px;
+      border-radius: 4px;
+      overflow-x: auto;
+      font-size: 12px;
+      color: #333;
+    }
+
+    .notification {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      padding: 16px 24px;
+      background: white;
+      border-radius: 8px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+      display: none;
+      animation: slideIn 0.3s ease;
+      z-index: 1000;
+      max-width: 300px;
+    }
+
+    .notification.show {
+      display: block;
+    }
+
+    .notification.success {
+      border-left: 4px solid #27ae60;
+    }
+
+    .notification.error {
+      border-left: 4px solid #e74c3c;
+    }
+
+    @keyframes slideIn {
+      from {
+        transform: translateX(400px);
+        opacity: 0;
+      }
+      to {
+        transform: translateX(0);
+        opacity: 1;
+      }
+    }
+
+    .hidden {
+      display: none !important;
+    }
+
+    .back-link-fixed {
+      position: fixed;
+      top: 20px;
+      left: 20px;
+      color: white;
+      text-decoration: none;
+      font-size: 14px;
+      opacity: 0.9;
+      transition: opacity 0.2s;
+      z-index: 1000;
+    }
+
+    .back-link-fixed:hover {
+      opacity: 1;
+    }
+  </style>
+</head>
+<body>
+  <a href="index.html" class="back-link-fixed">← Back to Examples</a>
+  <div class="container">
+    <h1>🪰 Oops Catcher Demo</h1>
+    <p class="subtitle">Privacy-First Consent Management</p>
+
+    <!-- Consent Banner -->
+    <div id="consent-banner" class="consent-banner">
+      <h3>Privacy & Data Collection</h3>
+      <p>We collect system information to help improve our service. Choose what data you're comfortable sharing:</p>
+
+      <div class="consent-options">
+        <div class="consent-option">
+          <label>
+            <input type="checkbox" checked disabled>
+            <span>User Agent</span>
+          </label>
+          <span class="required-badge">REQUIRED</span>
+        </div>
+
+        <div class="consent-option">
+          <label>
+            <input type="checkbox" checked disabled>
+            <span>Platform (OS)</span>
+          </label>
+          <span class="required-badge">REQUIRED</span>
+        </div>
+
+        <div class="consent-option">
+          <label>
+            <input type="checkbox" checked disabled>
+            <span>Screen Resolution</span>
+          </label>
+          <span class="required-badge">REQUIRED</span>
+        </div>
+
+        <div class="consent-option">
+          <label>
+            <input type="checkbox" checked disabled>
+            <span>Viewport Size</span>
+          </label>
+          <span class="required-badge">REQUIRED</span>
+        </div>
+
+        <div class="consent-option">
+          <label>
+            <input type="checkbox" id="consent-language" checked>
+            <span>Language Preference</span>
+          </label>
+        </div>
+
+        <div class="consent-option">
+          <label>
+            <input type="checkbox" id="consent-timezone" checked>
+            <span>Timezone</span>
+          </label>
+        </div>
+
+        <div class="consent-option">
+          <label>
+            <input type="checkbox" id="consent-memory" checked>
+            <span>Device Memory</span>
+          </label>
+        </div>
+
+        <div class="consent-option">
+          <label>
+            <input type="checkbox" id="consent-cores" checked>
+            <span>CPU Cores</span>
+          </label>
+        </div>
+
+        <div class="consent-option">
+          <label>
+            <input type="checkbox" id="consent-touch" checked>
+            <span>Touch Support</span>
+          </label>
+        </div>
+
+        <div class="consent-option">
+          <label>
+            <input type="checkbox" id="consent-color" checked>
+            <span>Color Depth</span>
+          </label>
+        </div>
+      </div>
+
+      <div class="consent-actions">
+        <button class="btn btn-primary" onclick="acceptConsent()">Accept & Continue</button>
+      </div>
+    </div>
+
+    <!-- Main Content (hidden until consent granted) -->
+    <div id="main-content" class="hidden">
+      <!-- Consent Status -->
+      <div id="consent-status" class="consent-status granted">
+        <div class="status-dot green"></div>
+        <span>Data collection consent granted</span>
+        <button class="btn-secondary" onclick="manageConsent()" style="margin-left: auto;">Manage</button>
+      </div>
+
+      <div class="tabs">
+        <button class="tab active" data-tab="bug">Bug Report</button>
+        <button class="tab" data-tab="feature">Feature Request</button>
+      </div>
+
+      <!-- Bug Report Form -->
+      <div class="tab-content active" id="bug-tab">
+        <form id="bug-form">
+          <div class="form-group">
+            <label for="bug-title">Title</label>
+            <input type="text" id="bug-title" placeholder="Brief description of the bug" required>
+          </div>
+
+          <div class="form-group">
+            <label for="bug-description">Description</label>
+            <textarea id="bug-description" placeholder="Detailed description of the issue..." required></textarea>
+          </div>
+
+          <div class="form-group">
+            <label for="bug-severity">Severity</label>
+            <select id="bug-severity">
+              <option value="low">Low</option>
+              <option value="medium" selected>Medium</option>
+              <option value="high">High</option>
+              <option value="critical">Critical</option>
+            </select>
+          </div>
+
+          <button type="submit">Submit Bug Report</button>
+        </form>
+      </div>
+
+      <!-- Feature Request Form -->
+      <div class="tab-content" id="feature-tab">
+        <form id="feature-form">
+          <div class="form-group">
+            <label for="feature-title">Feature Title</label>
+            <input type="text" id="feature-title" placeholder="What feature would you like?" required>
+          </div>
+
+          <div class="form-group">
+            <label for="feature-description">Description</label>
+            <textarea id="feature-description" placeholder="Describe the feature in detail..." required></textarea>
+          </div>
+
+          <div class="form-group">
+            <label for="feature-priority">Priority</label>
+            <select id="feature-priority">
+              <option value="low">Low</option>
+              <option value="medium" selected>Medium</option>
+              <option value="high">High</option>
+            </select>
+          </div>
+
+          <button type="submit">Submit Feature Request</button>
+        </form>
+      </div>
+
+      <!-- Demo Actions -->
+      <div class="demo-actions">
+        <h3>Demo Actions</h3>
+        <div class="btn-group">
+          <button class="btn-secondary" onclick="showSystemInfo()">Show System Info</button>
+          <button class="btn-secondary" onclick="showConsentState()">Show Consent State</button>
+          <button class="btn-secondary" onclick="revokeConsent()">Revoke Consent</button>
+        </div>
+
+        <div id="info-display"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="notification" id="notification"></div>
+
+  <script type="module">
+    // Simulated ConsentManager
+    class ConsentManager {
+      constructor() {
+        this.loadConsent();
+      }
+
+      loadConsent() {
+        try {
+          const stored = localStorage.getItem('oops-catcher-consent');
+          this.consentState = stored ? JSON.parse(stored) : null;
+        } catch (e) {
+          this.consentState = null;
+        }
+      }
+
+      saveConsent() {
+        if (this.consentState) {
+          localStorage.setItem('oops-catcher-consent', JSON.stringify(this.consentState));
+        }
+      }
+
+      grantConsent(preferences = {}) {
+        this.consentState = {
+          granted: true,
+          timestamp: new Date().toISOString(),
+          preferences: {
+            userAgent: true,
+            platform: true,
+            screenResolution: true,
+            viewport: true,
+            online: true,
+            cookiesEnabled: true,
+            pixelRatio: true,
+            language: preferences.language ?? true,
+            timezone: preferences.timezone ?? true,
+            memory: preferences.memory ?? true,
+            cores: preferences.cores ?? true,
+            touchSupport: preferences.touchSupport ?? true,
+            colorDepth: preferences.colorDepth ?? true
+          }
+        };
+        this.saveConsent();
+      }
+
+      revokeConsent() {
+        this.consentState = null;
+        localStorage.removeItem('oops-catcher-consent');
+      }
+
+      hasConsent() {
+        return this.consentState?.granted ?? false;
+      }
+
+      getConsentState() {
+        return this.consentState;
+      }
+
+      isFieldAllowed(field) {
+        if (!this.hasConsent()) return false;
+        const requiredFields = ['userAgent', 'platform', 'screenResolution', 'viewport', 'online', 'cookiesEnabled', 'pixelRatio'];
+        if (requiredFields.includes(field)) return true;
+        return this.consentState?.preferences?.[field] ?? false;
+      }
+    }
+
+    // Simulated Oops class
+    class OopsDemo {
+      constructor(config) {
+        this.config = config;
+        this.consent = new ConsentManager();
+      }
+
+      getSystemInfo() {
+        if (!this.consent.hasConsent()) {
+          throw new Error('User consent required. Call grantConsent() first.');
+        }
+
+        const ua = navigator.userAgent;
+        const isAppleSilicon = ua.includes('Mac') && navigator.maxTouchPoints > 0;
+        let platformInfo = navigator.platform;
+        if (isAppleSilicon) {
+          platformInfo = 'macOS (Apple Silicon)';
+        }
+
+        const systemInfo = {
+          userAgent: ua,
+          platform: platformInfo,
+          screenResolution: `${window.screen.width}x${window.screen.height}`,
+          viewport: `${window.innerWidth}x${window.innerHeight}`,
+          online: navigator.onLine,
+          cookiesEnabled: navigator.cookieEnabled,
+          pixelRatio: window.devicePixelRatio
+        };
+
+        if (this.consent.isFieldAllowed('language')) {
+          systemInfo.language = navigator.language;
+        }
+
+        if (this.consent.isFieldAllowed('timezone')) {
+          systemInfo.timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+        }
+
+        if (this.consent.isFieldAllowed('memory')) {
+          const memory = navigator.deviceMemory;
+          if (memory) systemInfo.memory = `${memory} GB`;
+        }
+
+        if (this.consent.isFieldAllowed('cores')) {
+          systemInfo.cores = navigator.hardwareConcurrency;
+        }
+
+        if (this.consent.isFieldAllowed('touchSupport')) {
+          systemInfo.touchSupport = navigator.maxTouchPoints > 0;
+        }
+
+        if (this.consent.isFieldAllowed('colorDepth')) {
+          systemInfo.colorDepth = `${window.screen.colorDepth}-bit`;
+        }
+
+        return systemInfo;
+      }
+
+      async report(userReport) {
+        // Smart data collection - only include system info for bug reports
+        const isBugReport = userReport.category === 'bug' || userReport.severity !== undefined;
+
+        const submission = {
+          userReport,
+          systemInfo: isBugReport ? this.getSystemInfo() : null,
+          timestamp: new Date().toISOString()
+        };
+
+        console.log('Submitting report:', submission);
+        await new Promise(resolve => setTimeout(resolve, 500));
+
+        return {
+          success: true,
+          message: 'Report submitted successfully',
+          id: 'demo-' + Date.now()
+        };
+      }
+    }
+
+    // Initialize Oops
+    window.oops = new OopsDemo({
+      endpoint: 'https://api.example.com/feedback',
+      apiKey: 'demo-api-key'
+    });
+
+    // Check if consent already granted
+    if (window.oops.consent.hasConsent()) {
+      document.getElementById('consent-banner').classList.add('hidden');
+      document.getElementById('main-content').classList.remove('hidden');
+    }
+
+    // Accept consent
+    window.acceptConsent = function() {
+      const preferences = {
+        language: document.getElementById('consent-language').checked,
+        timezone: document.getElementById('consent-timezone').checked,
+        memory: document.getElementById('consent-memory').checked,
+        cores: document.getElementById('consent-cores').checked,
+        touchSupport: document.getElementById('consent-touch').checked,
+        colorDepth: document.getElementById('consent-color').checked
+      };
+
+      window.oops.consent.grantConsent(preferences);
+      document.getElementById('consent-banner').classList.add('hidden');
+      document.getElementById('main-content').classList.remove('hidden');
+      showNotification('Consent granted! Thank you.', 'success');
+    };
+
+    // Manage consent
+    window.manageConsent = function() {
+      document.getElementById('main-content').classList.add('hidden');
+      document.getElementById('consent-banner').classList.remove('hidden');
+    };
+
+    // Revoke consent
+    window.revokeConsent = function() {
+      window.oops.consent.revokeConsent();
+      document.getElementById('main-content').classList.add('hidden');
+      document.getElementById('consent-banner').classList.remove('hidden');
+      showNotification('Consent revoked', 'error');
+    };
+
+    // Show system info
+    window.showSystemInfo = function() {
+      try {
+        const info = window.oops.getSystemInfo();
+        const display = document.getElementById('info-display');
+        display.innerHTML = `
+          <div class="info-panel">
+            <h4>System Information (Respecting Consent)</h4>
+            <pre>${JSON.stringify(info, null, 2)}</pre>
+          </div>
+        `;
+      } catch (error) {
+        showNotification(error.message, 'error');
+      }
+    };
+
+    // Show consent state
+    window.showConsentState = function() {
+      const state = window.oops.consent.getConsentState();
+      const display = document.getElementById('info-display');
+      display.innerHTML = `
+        <div class="info-panel">
+          <h4>Consent State</h4>
+          <pre>${JSON.stringify(state, null, 2)}</pre>
+        </div>
+      `;
+    };
+
+    // Tab switching
+    document.querySelectorAll('.tab').forEach(tab => {
+      tab.addEventListener('click', () => {
+        const tabName = tab.dataset.tab;
+        document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+        document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+        tab.classList.add('active');
+        document.getElementById(tabName + '-tab').classList.add('active');
+      });
+    });
+
+    // Bug form submission
+    document.getElementById('bug-form').addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      const userReport = {
+        message: document.getElementById('bug-title').value,
+        description: document.getElementById('bug-description').value,
+        category: 'bug',
+        severity: document.getElementById('bug-severity').value
+      };
+
+      const result = await window.oops.report(userReport);
+
+      showNotification(
+        result.success ? 'Bug report submitted successfully!' : 'Failed to submit bug report',
+        result.success ? 'success' : 'error'
+      );
+
+      if (result.success) {
+        e.target.reset();
+      }
+    });
+
+    // Feature form submission
+    document.getElementById('feature-form').addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      const userReport = {
+        message: document.getElementById('feature-title').value,
+        description: document.getElementById('feature-description').value,
+        category: 'feedback'
+      };
+
+      const result = await window.oops.report(userReport);
+
+      showNotification(
+        result.success ? 'Feature request submitted successfully!' : 'Failed to submit feature request',
+        result.success ? 'success' : 'error'
+      );
+
+      if (result.success) {
+        e.target.reset();
+      }
+    });
+
+    // Notification helper
+    function showNotification(message, type = 'success') {
+      const notification = document.getElementById('notification');
+      notification.textContent = message;
+      notification.className = `notification ${type} show`;
+
+      setTimeout(() => {
+        notification.classList.remove('show');
+      }, 3000);
+    }
+  </script>
+</body>
+</html>
