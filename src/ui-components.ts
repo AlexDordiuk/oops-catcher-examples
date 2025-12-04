@@ -93,7 +93,7 @@ export class UIComponents {
           ${content}
         </div>
         <div class="px-6 py-4 border-t border-gray-200 flex justify-end">
-          <button class="px-4 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition-colors" onclick="this.closest('.fixed').remove()">
+          <button class="px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors" onclick="this.closest('.fixed').remove()">
             Close
           </button>
         </div>

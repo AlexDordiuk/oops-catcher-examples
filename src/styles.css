@@ -1,13 +1,13 @@
 @import "tailwindcss";
 
 @theme {
-  --color-primary: #667eea;
-  --color-primary-dark: #764ba2;
-  --color-accent: #8b7dd8;
-  --color-light: #f8f7ff;
-  --color-success: #667eea;
-  --color-error: #764ba2;
-  --color-warning: #8b7dd8;
+  --color-primary: #C3240B;
+  --color-primary-dark: #B22A16;
+  --color-accent: #E85D3C;
+  --color-light: #FFF5F3;
+  --color-success: #10B981;
+  --color-error: #C0250D;
+  --color-warning: #F59E0B;
 }
 
 @source "../**/*.html";
@@ -21,11 +21,11 @@
 
 /* Custom gradient backgrounds */
 .gradient-bg {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: linear-gradient(135deg, #C3240B 0%, #B22A16 100%);
 }
 
 .gradient-subtle {
-  background: linear-gradient(135deg, #f8f7ff 0%, #ffffff 100%);
+  background: linear-gradient(135deg, #FFF5F3 0%, #ffffff 100%);
 }
 
 /* Glass morphism effect */
@@ -33,6 +33,18 @@
   background: rgba(255, 255, 255, 0.1);
   backdrop-filter: blur(10px);
   border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+/* Header with muted red glassmorphism */
+.header-glass {
+  background: linear-gradient(
+    135deg,
+    rgba(195, 36, 11, 0.05) 0%,
+    rgba(178, 42, 22, 0.08) 100%
+  );
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(195, 36, 11, 0.1);
 }
 
 /* Code blocks */
@@ -76,8 +88,8 @@ select {
 
 select:focus {
   outline: none;
-  border-color: #667eea;
-  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+  border-color: #C3240B;
+  box-shadow: 0 0 0 3px rgba(195, 36, 11, 0.1);
 }
 
 option {
@@ -87,7 +99,7 @@ option {
 }
 
 option:checked {
-  background: linear-gradient(0deg, #667eea 0%, #667eea 100%);
+  background: linear-gradient(0deg, #C3240B 0%, #C3240B 100%);
   color: white;
 }
 
@@ -124,8 +136,8 @@ option:checked {
 }
 
 .custom-select-trigger.active {
-  border-color: #667eea;
-  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+  border-color: #C3240B;
+  box-shadow: 0 0 0 3px rgba(195, 36, 11, 0.1);
 }
 
 .custom-select-arrow {
@@ -187,8 +199,8 @@ option:checked {
 }
 
 .custom-select-option.selected {
-  background-color: #ede9fe;
-  color: #667eea;
+  background-color: #FEE2E2;
+  color: #B22A16;
   font-weight: 500;
 }
 
@@ -206,24 +218,24 @@ option:checked {
 }
 
 .card:hover {
-  @apply shadow-lg border-purple-100;
+  @apply shadow-lg border-red-100;
 }
 
 /* Button styles */
 .btn-primary {
-  @apply px-6 py-3 bg-gradient-to-r from-purple-500 to-purple-600 text-white rounded-lg font-medium shadow-sm;
+  @apply px-6 py-3 bg-gradient-to-r from-red-600 to-red-700 text-white rounded-lg font-medium shadow-sm;
 }
 
 .btn-primary:hover {
-  @apply shadow-md from-purple-600 to-purple-700;
+  @apply shadow-md from-red-700 to-red-800;
 }
 
 .btn-secondary {
-  @apply px-6 py-3 bg-white text-purple-600 rounded-lg font-medium border-2 border-purple-200;
+  @apply px-6 py-3 bg-white text-red-700 rounded-lg font-medium border-2 border-red-200;
 }
 
 .btn-secondary:hover {
-  @apply bg-purple-50 border-purple-300;
+  @apply bg-red-50 border-red-300;
 }
 
 /* Badge styles */
@@ -231,10 +243,10 @@ option:checked {
   @apply px-3 py-1 rounded-full text-xs font-medium;
 }
 
-.badge-purple {
-  @apply bg-purple-100 text-purple-700;
+.badge-primary {
+  @apply bg-red-100 text-red-800;
 }
 
 .badge-success {
-  @apply bg-purple-50 text-purple-600;
+  @apply bg-green-50 text-green-700;
 }
