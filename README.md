@@ -1,6 +1,10 @@
-# 🪰 Oops Catcher Examples
+<div align="center">
+  <img src="./assets/images/logo.svg" alt="Oops Catcher" width="600">
 
-Live examples and interactive demos for [Oops Catcher](https://github.com/AlexDordiuk/oops-catcher) SDK.
+  <h1>Oops Catcher Examples</h1>
+
+  <p>Live examples and interactive demos for <a href="https://github.com/AlexDordiuk/oops-catcher">Oops Catcher</a> SDK.</p>
+</div>
 
 **[📺 View Live Demos](https://alexdordiuk.github.io/oops-catcher-examples/)** | **[💻 Main Repository](https://github.com/AlexDordiuk/oops-catcher)**
 
